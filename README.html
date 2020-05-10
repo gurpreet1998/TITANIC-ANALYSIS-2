@@ -1,0 +1,102 @@
+<h1 id="titanic-analysis">TITANIC-ANALYSIS</h1>
+<h3 id="note-this-is-over-view-refer-to-the-notebook-for-deeper-insights">NOTE: <code>'This is over-view, refer to the notebook for deeper insights</code>'</h3>
+<p>This repository aim to provide competitive analysis of the data that help us to know the facts and eextract the meaning full information that lead to predict the survival of the passengers. In this contest, we ask you to complete the analysis of what sorts of people were likely to survive. In particular, we ask you to apply the tools of machine learning to predict which passengers survived the tragedy.</p>
+<h3 id="libraries">Libraries:</h3>
+<ul>
+<li>Pandas</li>
+<li>Numpy</li>
+<li>Scikit-Learn</li>
+<li>Matplotlib</li>
+</ul>
+<h3 id="nokebook-aim">Nokebook Aim:</h3>
+<h4 id="importing-specific-libraries">Importing specific libraries</h4>
+<ul>
+<li>Listed above</li>
+</ul>
+<h4 id="data-cleaning">Data cleaning:</h4>
+<p>Titanic data consist of following features: 1) <code>'PassengerId</code>' --- text 2) <code>'Survived</code>' --- categorical 3) <code>'Pclass</code>' --- Categ 4) <code>'Name</code>' --- text 5) <code>'Sex</code>' --- Categorical 6) <code>'Age</code>' --- Continuous 7) <code>'SibSp</code>' --- continuous 8) <code>'Parch</code>' --- continuous 9) <code>'Ticket</code>' --- Text 10) <code>'Fare</code>' --- continuous 11) <code>'Cabin</code>' --- text 12) <code>'Embarked</code>' --- categorical ##### IN TRAINING DATA * <code>'Age</code>' :- This attribute has <code>'19.87%</code>' null values * <code>'Cabin</code>' :- This attribute has most of the missing values <code>'77.10 %</code>' ##### IN TEST DATA * <code>'Cabin</code>' : <code>'78.23 %</code>' missing values * <code>'Age</code>' : <code>'20.57 %</code>' missing values * <code>'Fare</code>' : <code>'0.24 %</code>'</p>
+<p>As per the given data, Cabin has most of its values missing, so it is wise to drop this feature. Now for <code>'Age</code>', it is looking as important feature for further computation and analysis, so there are three ways to deal with this : 1) USE <code>'MEAN</code>' , <code>' MODE</code>' from whole coulmn 2) Analyse the age with other columns like <code>'Pclass</code>' and <code>'Sex</code>' , check the distribution of the ages in Pclass and Sex in Pclass. Accorindly we can add the values. 3) We can make a seperate regression model as predict the values of the age.</p>
+<p>As of now, we has choose 2nd method</p>
+<p>#### Method for calculating Age missing values : In this approach, Passsengers are grouped into Sex according to there respective class then Mean Age is recorded for each group of people. See this figure below to have better understanding. <img src="https://github.com/gurpreet1998/TITANIC-ANALYSIS/blob/master/Output%20figures/output_51_1.png" alt="AGE-CLASS-SEX" /></p>
+<h3 id="for-calulating-fare-missing-value">For calulating Fare missing value:</h3>
+<p>Beacause it is only one missing value , we noticed that value to which class it belong to (Pclass = 3), accordingly we calulated the mean of the Fare of class 3. Then assigned the value to missing spot. * Mean_value is = $ 12.46 which is quit justifiable.</p>
+<h2 id="label-encoding">Label Encoding</h2>
+<p>As we know that some of features have categorical values, so it is better to convert it using Label_encoder.</p>
+<h1 id="data-analysis">DATA ANALYSIS</h1>
+<h3 id="survived-vs-dead">1) SURVIVED vs DEAD</h3>
+<p>Now, lets start analyzing the data and get some useful insights from it. * Lets see total number of people survied vs dead <img src="https://github.com/gurpreet1998/TITANIC-ANALYSIS/blob/master/Output%20figures/output_9_1.png" alt="Survived/Dead" /></p>
+<p>##### NOTE : [ 0 : DEAD 1 :Survived ]</p>
+<p>###### <code>'Passenger's survival Percentage</code>' = 38.38 % ###### <code>'Passenger's  Death Percentage</code>' = 61.62 %</p>
+<h3 id="survivals-vs-p_class">2) 'Survivals ' vs 'P_class</h3>
+<p>This is to analyze if there is some trend in prediction survival related to class. There is chance that Higher class passenger were given more privilege to evacuate the ship.</p>
+<ul>
+<li>Below figure will show the Survived/Dead passengers according to Class</li>
+</ul>
+<p><img src="https://github.com/gurpreet1998/TITANIC-ANALYSIS/blob/master/Output%20figures/output_14_1.png" alt="&quot;CLASS vs SURVIVAL&quot;" /> ##### From the above figure it is clearly visible that 'Class 1 ' passengers were able to survive followed by 'Class 2 'and 'Class 3 ' passengers. This trend is there may be because of the priority, higher class passengers will be allowed to evacuate first then followed by other classes.</p>
+<ul>
+<li>Lets, check the distribution of 'Males' and 'Females' in each class and there survival rate <img src="https://github.com/gurpreet1998/TITANIC-ANALYSIS/blob/master/Output%20figures/output_16_1.png" alt="&quot;CLASS vs SURVIVAL&quot;" /></li>
+</ul>
+<p>##### The above figure shows the similar pattern like that of P_class vs survival. This figure represents that females were given more importance then men in there respective class. Similiar is applicable to men.</p>
+<h2 id="question-1">Question 1:</h2>
+<h4 id="is-there-chance-that-high-class-passangers-were-able-to-escape-due-to-the-embarkment-location-and-not-due-to-the-status">Is there chance that High class passangers were able to escape due to the embarkment location and not due to the status ?</h4>
+<h2 id="answer-1">Answer 1:</h2>
+<p>TO answer this question, Two things have to be done: 1) First of all, analyze the graph of <code>'Embarked</code>' vs <code>'Fare</code>' We are doing this because, we want to know which Embakement is having more Fare and what is the range of Fare.</p>
+<pre><code>  ![&quot;EMBARKED vs FARE&quot;](https://github.com/gurpreet1998/TITANIC-ANALYSIS/blob/master/Output%20figures/output_19_1.png)
+  ![&quot;EMBARKED vs FARE&quot;](https://github.com/gurpreet1998/TITANIC-ANALYSIS/blob/master/Output%20figures/output_21_2.png)
+  </code></pre>
+<h4 id="following-are-the-analysis-from-the-figures-above">Following are the analysis from the figures above:</h4>
+<h6 id="left-figure">LEFT FIGURE:</h6>
+<ul>
+<li>'Embarkemt C ' is mostly assigned to 'Class 1 ' passengers</li>
+<li>'Embarkemt S ' is mostly assigned to 'Class 2 ' passengers</li>
+<li>'Embarkemt Q ' is mostly assigned to 'Class 3 ' passengers ###### RIGHT FIGURE: This figure shows that Embarked C passengers were the ones who survived the most. This is not co-incident. Again hiher class were given more priority.</li>
+</ul>
+<p>## Question 2: #### Is there relation between survival rate according to Fare and Age group? ## Answer 2: <img src="https://github.com/gurpreet1998/TITANIC-ANALYSIS/blob/master/Output%20figures/output_24_2.png" alt="&quot;FARE vs Passengers Survived&quot;" /></p>
+<ul>
+<li>From the above two parallel figure following observations are made: ##### 'FARE ' VS 'SURVIVAL ' OBSERVATION:</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>Passanger who paid more were survied more than passangers who paid less</li>
+</ol>
+<p>##### 'AGE ' vs 'SURVIVAL ' OBSERVATION 1) Talking about age, almost all old age passangers Age[70-80] died. 2) Second most deaths were recorded in age group [20-40].</p>
+<p>#### Deep analysis of deaths according to age groups Lets divide the age into 4 standard age groups, then we will look that in which group Death is recorded more. ###### Distribute the age groups into 4 category : * <code>'Child</code>' ------------(0-12) Years * <code>'Adolescence</code>'-------(13-18) Years * <code>'Adult</code>'-------------(19-49) Years * <code>'Senior_Adult</code>' -----(50 years and above)</p>
+<div class="figure">
+<img src="https://github.com/gurpreet1998/TITANIC-ANALYSIS/blob/master/Output%20figures/output_39_2.png" alt="&quot;Age group vs Survived&quot;" /><p class="caption">&quot;Age group vs Survived&quot;</p>
+</div>
+<p>#### Following are the observation from above plot * Among the Age groups, <code>'childrens</code>' were given more priority. * <code>'Adolescent</code>' were rescued after childrens * Most deaths are in <code>'Adult</code>' and <code>'Senior_Adult</code>' group</p>
+<p># Adding New Features: ### Feature 1: * There is a term called 'Synergy effect ' or 'Interaction ' between features. This will lead to justify the increase in the value of one feature due to the per unit change in another feature. For example,</p>
+<pre><code>                       Y = β0 + β1 ∗ X1 + β2 ∗ X2 + error.
+                    </code></pre>
+<ul>
+<li><p>According to this model, if we increase X 1 by one unit, then Y will increase by an average of β 1 units. Notice that the presence of X 2 does not alter this statement—that is, regardless of the value of X 2 , a one-unit increase in X 1 will lead to a β 1 -unit increase in Y . One way of extending this model to allow for interaction effects is to include a third predictor, called an interaction term, which is constructed by computing the product of X 1 and X 2 . This results in the model</p>
+<pre><code>                Y = β0 + β1 ∗ X1 + β2 ∗ X2 + (β3 ∗ X1 ∗ X2) + error</code></pre></li>
+</ul>
+<p>### Feature 2: * Now we know that 'Sibsp ' resembles Siblings and 'Parch ' represents parents. So accordingly we can find total family members. We are adding this feature because there is chance that someone having family get died to save them.</p>
+<pre><code>                     df[&#39;Family_Size&#39;]=df[&#39;SibSp&#39;]+df[&#39;Parch&#39;]        
+                     </code></pre>
+<p>### Feature 3: *'Age_group ' feature is added during analysis of the age vs survival. $ categorical feature collumn is added that we have discussed earlier.</p>
+<p># Normalizing The Data As quantitative values are having a little difference. For exmaple - ' FARE' , ' AGE' have large values as compared to rest of features. This condition will make algorithm to put more weights to those features. Therefore, to deal with this situation NORMALIZATION is must. For this we ususally use - <code>'MIN_MAX_SCALER</code>'</p>
+<div class="figure">
+<img src="https://github.com/gurpreet1998/TITANIC-ANALYSIS/blob/master/Output%20figures/output_86_0.png" alt="&quot;Age group vs Survived&quot;" /><p class="caption">&quot;Age group vs Survived&quot;</p>
+</div>
+<div class="figure">
+<img src="https://github.com/gurpreet1998/TITANIC-ANALYSIS/blob/master/Output%20figures/output_90_0.png" alt="&quot;Age group vs Survived&quot;" /><p class="caption">&quot;Age group vs Survived&quot;</p>
+</div>
+<h3 id="section">------------------------------------------------------------------------------------------------------------------------</h3>
+<h2 id="model-formulation">Model Formulation</h2>
+<h3 id="till-now-we-have-get-intuition-from-the-data-now-lets-use-predictive-models-to-predict-the-survival.">Till now we have get intuition from the data, Now lets use predictive models to predict the survival.</h3>
+<p>In this notebook we have used 3 Supervised model for classification</p>
+<ul>
+<li>K-Nearest Neighbors (KNeighbors)</li>
+<li>Support Vector Machines (SVM)</li>
+<li>Quadractic Discriminant Analysis</li>
+</ul>
+<p><img src="https://github.com/gurpreet1998/TITANIC-ANALYSIS/blob/master/Output%20figures/output_106_4.png" alt="&quot;Age group vs Survived&quot;" /> <img src="https://github.com/gurpreet1998/TITANIC-ANALYSIS/blob/master/Output%20figures/metrics%20table" alt="&quot;Age group vs Survived&quot;" /></p>
+<h3 id="analysis-of-result">Analysis Of Result</h3>
+<ul>
+<li><p>As we see in the output histograms,and Table 'KNN ' does the best among the three.</p></li>
+<li><p>There is huge difference between model's 'trainng accuracy' and ' Testing_accuracy' . This shows that model is over fitting on the data.</p></li>
+<li><p>To deal with the over fitting problem we can remove certain features that are irrelevent to the model.</p></li>
+<li><p>To deal with Overfitting we can do Regularization.</p></li>
+</ul>
+<h2 id="kaggle-score-0.7755">KAGGLE SCORE: 0.7755</h2>
